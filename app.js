@@ -104,16 +104,44 @@ myText.x = 200;
 myText.y = 200;
 app.stage.addChild(myText);
 
+// // Create a new ticker that calls the loop function
+// app.ticker.add((delta) => loop(delta));
+
+// // The loop function is called every frame
+// function loop(delta) {
+//   const rectangle = new Graphics();
+//   rectangle
+//     .beginFill(0x66ccff)
+//     .lineStyle(4, 0xefefef, 1)
+//     .drawRect(Math.random() * app.screen.width, Math.random() * app.screen.height, 10, 10)
+//     .endFill();
+//   // Add the rectangle to the stage
+//   app.stage.addChild(rectangle);
+// }
+
+// const texture = PIXI.Texture.from("./images/Headshot.png");
+// const sprite = new PIXI.Sprite(texture);
 
 app.ticker.add((delta) => loop(delta));
 
-function loop(delta) {  
-  const rectangle = new Graphics();
-  rectangle
-    .beginFill(0x66ccff)
-    .lineStyle(4, 0xefefef, 1)
-    .drawRect(Math.random() * app.screen.width, Math.random() * app.screen.height, 10, 10)
-    .endFill();
-  // Add the rectangle to the stage
-  app.stage.addChild(rectangle);
+function loop(delta) {
+  sprite.rotation += 0.1;
+  sprite.x += 2;
+  sprite.y += 3;
+
+  if (sprite.x > app.screen.width) {
+    sprite.x = 0;
+  }
+  if (sprite.y > app.screen.height) {
+    sprite.y = 0;
+  }
 }
+
+const sprite = PIXI.Sprite.from("./images/Headshot.png");
+
+sprite.scale.set(0.25);
+sprite.anchor.set(0.5);
+sprite.x = app.screen.width / 2;
+sprite.y = app.screen.height / 2;
+
+app.stage.addChild(sprite);
